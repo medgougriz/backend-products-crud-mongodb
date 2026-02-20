@@ -50,10 +50,10 @@ app.post('/api/product',(req,res)=>{
 })
 
 app.post('/api/products',(req,res)=>{
-    const [{name, price, description, photo}] = req.body
-    Product.insertMany([{name, price, description, photo}])
-    .then((data)=>{
-        res.json(data)
+    const data = req.body
+    Product.insertMany(data)
+    .then(()=>{
+        res.json({data:data.length})
     })
     .catch((err)=>{
         res.json(err)
