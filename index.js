@@ -81,7 +81,22 @@ app.delete('/api/product/:id',(req,res)=>{
     })
 })
 
-
+app.put('/api/product/:id',(req,res)=>{
+    const id = req.params.id
+    const {name, price, description, photo} = req.body
+    const product = Product.findByIdAndUpdate(id,{
+        name:name,
+        price:price,
+        description:description,
+        photo:photo
+    },{new:true})
+    .then((data)=>{
+        res.json(data)
+    })
+    .catch((err)=>{
+        res.json(err)
+    })
+})
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
