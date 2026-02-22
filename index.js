@@ -70,6 +70,17 @@ app.get('/api/products',(req,res)=>{
     })
 })
 
+app.delete('/api/product/:id',(req,res)=>{
+    const id = req.params.id
+    const product = Product.findByIdAndDelete(id)
+    .then((data)=>{
+        res.json(data)
+    })
+    .catch((err)=>{
+        res.json(err)
+    })
+})
+
 
 
 app.listen(PORT,()=>{
