@@ -19,7 +19,6 @@ mongoose.connect(URL_MONGOOSE)
 
 
 //database
-const db_users=[]
 
 const app = express()
 
@@ -29,8 +28,9 @@ app.use(morgan('combined'))
 app.use(cors())
 
 //GET ALL USRES
-app.get('/api/users',(req,res)=>{
-    res.json(db_users)
+app.get('/api/users',async (req,res)=>{
+    const products = await Product.find()
+    res.json(products)
 })
 
 app.post('/api/product',(req,res)=>{
@@ -69,6 +69,8 @@ app.get('/api/products',(req,res)=>{
         res.json(err)
     })
 })
+
+
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
